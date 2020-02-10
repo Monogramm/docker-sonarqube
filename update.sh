@@ -60,8 +60,7 @@ for latest in "${latests[@]}"; do
 			dir="images/$version/$variant"
 			mkdir -p "$dir"
 
-			template="Dockerfile-${base[$variant]}.template"
-			cp "template/$template" "$dir/Dockerfile"
+			cp "template/Dockerfile.${base[$variant]}" "$dir/Dockerfile"
 
 			cp "template/.dockerignore" "$dir/.dockerignore"
 			cp -r "template/hooks" "$dir/"

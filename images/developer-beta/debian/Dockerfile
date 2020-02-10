@@ -5,8 +5,14 @@ ENV SONARQUBE_HOME /opt/sonarqube
 # Add SonarQube plugins
 RUN set -ex; \
     cd $SONARQUBE_HOME/extensions/plugins; \
-    wget "https://binaries.sonarsource.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-2.2.0.608.jar"; \
-    wget "https://github.com/gabrie-allaigre/sonar-auth-gitlab-plugin/releases/download/1.3.2/sonar-auth-gitlab-plugin-1.3.2.jar"
+    curl \
+        "https://binaries.sonarsource.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-2.2.0.608.jar" \
+        -o sonar-ldap-plugin-2.2.0.608.jar \
+    ; \
+    curl \
+        "https://github.com/gabrie-allaigre/sonar-auth-gitlab-plugin/releases/download/1.3.2/sonar-auth-gitlab-plugin-1.3.2.jar" \
+        -o sonar-auth-gitlab-plugin-1.3.2.jar \
+    ;
 
 # Arguments to label built container
 ARG VCS_REF
