@@ -1,5 +1,14 @@
 version: "2"
 
+networks:
+  sonarnet:
+
+volumes:
+  sonarqube_conf:
+  sonarqube_extensions:
+  sonarqube_data:
+  sonarqube_logs:
+
 services:
   # https://docs.docker.com/docker-hub/builds/automated-testing/
   sut:
@@ -7,15 +16,15 @@ services:
       context: ./test
       dockerfile: Dockerfile
     depends_on:
-      - __app_slug__db
-      - __app_slug__
+      - sonarqube_db
+      - sonarqube
     volumes_from:
-      - __app_slug__
+      - sonarqube
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
 
-  __app_slug__:
+  sonarqube:
     # For development or CI, tag build from local Dockerfile
     build:
       context: ./
@@ -26,38 +35,41 @@ services:
         - BUILD_DATE=${BUILD_DATE}
     # For production, download prebuilt image
     #image: ${IMAGE_NAME}
-    container_name: __app_slug__
+    container_name: sonarqube
     #restart: always
     depends_on:
-      - __app_slug__db
-    links:
-      - __app_slug__db
+      - sonarqubedb
     ports:
-      - 80:80
+      - "49000:9000"
+      - "40443:443"
+    networks:
+      - sonarnet
     volumes:
-      - /srv/__app_slug__/html:/var/www/html
+      - sonarqube_conf:/opt/sonarqube/conf
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_logs:/opt/sonarqube/logs
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     environment:
-      - __app_uppercase_slug___DB_TYPE=mysql
-      - __app_uppercase_slug___DB_HOST=__app_slug__db # same as mysql container name
-      - __app_uppercase_slug___DB_NAME=__app_slug__ # same as mysql MYSQL_DATABASE env name
-      - __app_uppercase_slug___DB_USER=__app_slug__ # same as mysql MYSQL_USER env name
-      - __app_uppercase_slug___DB_PASSWORD=__app_slug__dbpass # same as mysql MYSQL_PASSWORD env name
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://sonarqube_db:5432/${SONARQUBE_DB_NAME}
+      - sonar.jdbc.url=jdbc:postgresql://sonarqube_db:5432/${SONARQUBE_DB_NAME}
+      - SONARQUBE_JDBC_USERNAME=${SONARQUBE_DB_USER}
+      - sonar.jdbc.username=${SONARQUBE_DB_USER}
+      - SONARQUBE_JDBC_PASSWORD=${SONARQUBE_DB_PWD}
+      - sonar.jdbc.password=${SONARQUBE_DB_PWD}
 
-  __app_slug__db:
-    image: mariadb:latest
-    container_name: __app_slug__db
+  sonarqube_db:
+    image: postgres:latest
+    container_name: sonarqube_db
     restart: always
-    command: --character_set_client=utf8 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --character-set-client-handshake=FALSE
     #ports:
-    #  - 3306:3306
+    #  - 5432:5432
     volumes:
-      - /srv/__app_slug__/db:/var/lib/mysql
+      - /srv/sonarqube/db:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     environment:
-      - MYSQL_ROOT_PASSWORD=mysqlrootpassword
-      - MYSQL_DATABASE=__app_slug__
-      - MYSQL_USER=__app_slug__
-      - MYSQL_PASSWORD=__app_slug__dbpass
+      - POSTGRES_DB=${SONARQUBE_DB_NAME}
+      - POSTGRES_USER=${SONARQUBE_DB_USER}
+      - POSTGRES_PASSWORD=${SONARQUBE_DB_PWD}

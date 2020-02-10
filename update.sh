@@ -13,10 +13,10 @@ declare -A base=(
 
 variants=(
 	debian
-	alpine
+	#alpine
 )
 
-min_version='1.0'
+#min_version='1.0'
 
 
 # version_greater_or_equal A B returns whether A >= B
@@ -24,17 +24,22 @@ function version_greater_or_equal() {
 	[[ "$(printf '%s\n' "$@" | sort -V | head -n 1)" != "$1" || "$1" == "$2" ]];
 }
 
-dockerRepo="monogramm/docker-__app_slug__"
+dockerRepo="monogramm/docker-sonarqube"
 # Retrieve automatically the latest versions
-#latests=( $( curl -fsSL 'https://api.github.com/repos/__app_owner_slug__/__app_slug__/tags' |tac|tac| \
+#latests=( $( curl -fsSL 'https://api.github.com/repos/SonarSource/docker-sonarqube/tags' |tac|tac| \
 #	grep -oE '[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+' | \
 #	sort -urV ) )
-latests=( 1.0.0 )
+latests=(
+	lts
+	community-beta
+	developer-beta
+	enterprise-beta
+)
 
 # Remove existing images
 echo "reset docker images"
-find ./images -maxdepth 1 -type d -regextype sed -regex '\./images/[[:digit:]]\+\.[[:digit:]]\+' -exec rm -r '{}' \;
-#rm -rf ./images/*
+#find ./images -maxdepth 1 -type d -regextype sed -regex '\./images/[[:digit:]]\+\.[[:digit:]]\+' -exec rm -r '{}' \;
+rm -rf ./images/*
 
 echo "update docker images"
 travisEnv=
@@ -46,7 +51,7 @@ for latest in "${latests[@]}"; do
 	fi
 
 	# Only add versions >= "$min_version"
-	if version_greater_or_equal "$version" "$min_version"; then
+	#if version_greater_or_equal "$version" "$min_version"; then
 
 		for variant in "${variants[@]}"; do
 			echo "Updating $latest [$version-$variant]"
@@ -79,7 +84,7 @@ for latest in "${latests[@]}"; do
 				docker build -t ${dockerRepo}:${tag} $dir
 			fi
 		done
-	fi
+	#fi
 
 done
 

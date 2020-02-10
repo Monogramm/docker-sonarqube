@@ -3,63 +3,42 @@
 [uri_license_image]: https://img.shields.io/badge/License-AGPL%20v3-blue.svg
 
 [![License: AGPL v3][uri_license_image]][uri_license]
-[![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://monogramm.github.io/__app_slug__/)
-[![Build Status](https://travis-ci.org/Monogramm/docker-__app_slug__.svg)](https://travis-ci.org/Monogramm/docker-__app_slug__)
-[![Docker Automated buid](https://img.shields.io/docker/cloud/build/monogramm/docker-__app_slug__.svg)](https://hub.docker.com/r/monogramm/docker-__app_slug__/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/docker-__app_slug__.svg)](https://hub.docker.com/r/monogramm/docker-__app_slug__/)
-[![Docker Version](https://images.microbadger.com/badges/version/monogramm/docker-__app_slug__.svg)](https://microbadger.com/images/monogramm/docker-__app_slug__)
-[![Docker Size](https://images.microbadger.com/badges/image/monogramm/docker-__app_slug__.svg)](https://microbadger.com/images/monogramm/docker-__app_slug__)
-[![GitHub stars](https://img.shields.io/github/stars/Monogramm/docker-__app_slug__?style=social)](https://github.com/Monogramm/docker-__app_slug__)
+[![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://monogramm.github.io/docker-sonarqube/)
+[![Build Status](https://travis-ci.org/Monogramm/docker-sonarqube.svg)](https://travis-ci.org/Monogramm/docker-sonarqube)
+[![Docker Automated buid](https://img.shields.io/docker/cloud/build/monogramm/docker-sonarqube.svg)](https://hub.docker.com/r/monogramm/docker-sonarqube/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/docker-sonarqube.svg)](https://hub.docker.com/r/monogramm/docker-sonarqube/)
+[![Docker Version](https://images.microbadger.com/badges/version/monogramm/docker-sonarqube.svg)](https://microbadger.com/images/monogramm/docker-sonarqube)
+[![Docker Size](https://images.microbadger.com/badges/image/monogramm/docker-sonarqube.svg)](https://microbadger.com/images/monogramm/docker-sonarqube)
+[![GitHub stars](https://img.shields.io/github/stars/Monogramm/docker-sonarqube?style=social)](https://github.com/Monogramm/docker-sonarqube)
 
-<!--
+# **SonarQube** Docker image
 
-Template variables to replace in ALL files:
-* __app_name__: Name of the application
-* __app_owner_slug__: GitHub Owner of the original application
-* __app_slug__: GitHub slug of the original application
-* __app_uppercase_slug__: Uppercase value of the GitHub slug
-* __app_description__: Application description
-* __app_url__: Application URL
-* __app_vendor_name__: Uppercase value of the GitHub slug
-
-After replacing all variables:
-* Edit `update.sh` to edit how to retrieve the application latest versions and how to generate images
-* Edit `template/docker-compose_*.yml` to configure your Docker environment for CI
-* Edit `template/test` content for DockerHub custom tests
-
--->
-
-# **__app_name__** Docker image
-
-Docker image for **__app_name__**.
+Custom Docker image for **SonarQube** with additional plugins.
 
 :construction: **This image is still in development!**
 
-## What is **__app_name__** ?
+## What is **SonarQube** ?
 
-__app_description__
+Open Source product for continuous inspection of code quality
 
-> [**__app_name__**](__app_url__)
+> [**SonarQube**](https://www.sonarqube.org)
 
 ## Supported tags
 
-[Dockerhub monogramm/docker-__app_slug__](https://hub.docker.com/r/monogramm/docker-__app_slug__/)
+[Dockerhub monogramm/docker-sonarqube](https://hub.docker.com/r/monogramm/docker-sonarqube/)
 
-* `alpine` `latest`
-* `debian`
+* `lts` `latest`
+* `community-beta`
+* `developer-beta`
+* `enterprise-beta`
 
 ## How to run this image ?
 
-<!--
-    If based on official images, refer to official doc:
+See **SonarQube** base image documentation for details.
 
-See **__app_name__** base image documentation for details.
+> [**SonarQube** GitHub](https://github.com/SonarSource/docker-sonarqube)
 
-> [**__app_name__** GitHub](https://github.com/__app_owner_slug__/__app_slug__)
-
-> [**__app_name__** DockerHub](https://hub.docker.com/r/__app_owner_slug__/docker-__app_slug__-base/)
-
--->
+> [**SonarQube** DockerHub](https://hub.docker.com/_/sonarqube/)
 
 # Questions / Issues
-If you got any questions or problems using the image, please visit our [Github Repository](https://github.com/Monogramm/docker-__app_slug__) and write an issue.
+If you got any questions or problems using the image, please visit our [Github Repository](https://github.com/Monogramm/docker-sonarqube) and write an issue.
