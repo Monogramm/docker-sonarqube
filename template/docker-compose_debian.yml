@@ -38,7 +38,7 @@ services:
     container_name: sonarqube
     #restart: always
     depends_on:
-      - sonarqubedb
+      - sonarqube_db
     ports:
       - "49000:9000"
       - "40443:443"
