@@ -20,6 +20,8 @@ services:
       - sonarqube
     volumes_from:
       - sonarqube
+    networks:
+      - sonarnet
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
