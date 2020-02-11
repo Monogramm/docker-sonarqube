@@ -6,11 +6,11 @@ ENV SONARQUBE_HOME /opt/sonarqube
 RUN set -ex; \
     cd $SONARQUBE_HOME/extensions/plugins; \
     curl \
-        "https://binaries.sonarsource.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-2.2.0.608.jar" \
+        -L "https://binaries.sonarsource.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-2.2.0.608.jar" \
         -o sonar-ldap-plugin-2.2.0.608.jar \
     ; \
     curl \
-        "https://github.com/gabrie-allaigre/sonar-auth-gitlab-plugin/releases/download/1.3.2/sonar-auth-gitlab-plugin-1.3.2.jar" \
+        -L "https://github.com/gabrie-allaigre/sonar-auth-gitlab-plugin/releases/download/1.3.2/sonar-auth-gitlab-plugin-1.3.2.jar" \
         -o sonar-auth-gitlab-plugin-1.3.2.jar \
     ;
 
