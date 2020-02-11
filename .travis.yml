@@ -63,7 +63,7 @@ matrix:
     - env: VERSION=enterprise-beta VARIANT=debian
     - env: VERSION=developer-beta VARIANT=debian
     - env: VERSION=community-beta VARIANT=debian
-Z
+
 env: # Environments
     - VERSION=enterprise-beta VARIANT=debian
     - VERSION=developer-beta VARIANT=debian
