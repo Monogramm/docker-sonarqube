@@ -65,6 +65,8 @@ services:
     restart: always
     #ports:
     #  - 5432:5432
+    networks:
+      - sonarnet
     volumes:
       - /srv/sonarqube/db:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
