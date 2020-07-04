@@ -36,17 +36,25 @@ services:
         - VCS_REF=${VCS_REF}
         - BUILD_DATE=${BUILD_DATE}
     # For production, download prebuilt image
-    #image: ${IMAGE_NAME}
+    image: ${IMAGE_NAME}
     container_name: sonarqube
     #restart: always
-    depends_on:
-      - sonarqube_db
+    healthcheck:
+      test: CMD wget -qO- http://127.0.0.1:9000/api/system/status | grep -q -e '"status":"UP"' -e '"status":"DB_MIGRATION_NEEDED"' -e '"status":"DB_MIGRATION_RUNNING"' || exit 1
+      interval: 60s
+      timeout: 10s
+      #start_period: 5s
+      retries: 4
     ports:
       - "49000:9000"
       - "40443:443"
     networks:
       - sonarnet
+    depends_on:
+      sonarqube_db:
+        condition: service_healthy
     volumes:
+      # for Version 7.9.x only
       - sonarqube_conf:/opt/sonarqube/conf
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_data:/opt/sonarqube/data
@@ -65,8 +73,12 @@ services:
     image: postgres:latest
     container_name: sonarqube_db
     restart: always
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${SONARQUBE_DB_USER}"]
+    expose:
+      - '5432'
     #ports:
-    #  - 5432:5432
+    #  - "5432:5432"
     networks:
       - sonarnet
     volumes:

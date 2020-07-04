@@ -31,9 +31,9 @@ dockerRepo="monogramm/docker-sonarqube"
 #	sort -urV ) )
 latests=(
 	lts
-	community-beta
-	developer-beta
-	enterprise-beta
+	community
+	developer
+	enterprise
 )
 
 # Remove existing images
@@ -46,10 +46,6 @@ travisEnv=
 for latest in "${latests[@]}"; do
 	version=$(echo "$latest" | cut -d. -f1-2)
 
-	if [ -d "$version" ]; then
-		continue
-	fi
-
 	# Only add versions >= "$min_version"
 	#if version_greater_or_equal "$version" "$min_version"; then
 
@@ -58,6 +54,9 @@ for latest in "${latests[@]}"; do
 
 			# Create the version directory with a Dockerfile.
 			dir="images/$version/$variant"
+			if [ -d "$dir" ]; then
+				continue
+			fi
 			mkdir -p "$dir"
 
 			cp "template/Dockerfile.${base[$variant]}" "$dir/Dockerfile"

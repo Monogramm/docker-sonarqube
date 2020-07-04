@@ -1,7 +1,3 @@
-
-[uri_license]: http://www.gnu.org/licenses/agpl.html
-[uri_license_image]: https://img.shields.io/badge/License-AGPL%20v3-blue.svg
-
 [![License: AGPL v3][uri_license_image]][uri_license]
 [![Docs](https://img.shields.io/badge/Docs-Github%20Pages-blue)](https://monogramm.github.io/docker-sonarqube/)
 [![Build Status](https://travis-ci.org/Monogramm/docker-sonarqube.svg)](https://travis-ci.org/Monogramm/docker-sonarqube)
@@ -15,9 +11,7 @@
 
 Custom Docker image for **SonarQube** with additional plugins.
 
-:construction: **This image is still in development!**
-
-## What is **SonarQube** ?
+## What is **SonarQube**
 
 Open Source product for continuous inspection of code quality
 
@@ -27,10 +21,10 @@ Open Source product for continuous inspection of code quality
 
 [Dockerhub monogramm/docker-sonarqube](https://hub.docker.com/r/monogramm/docker-sonarqube/)
 
-* `lts` `latest`
-* `community-beta`
-* `developer-beta`
-* `enterprise-beta`
+-   `lts`
+-   `community` `latest`
+-   `developer`
+-   `enterprise`
 
 ## How to run this image ?
 
@@ -40,5 +34,10 @@ See **SonarQube** base image documentation for details.
 
 > [**SonarQube** DockerHub](https://hub.docker.com/_/sonarqube/)
 
-# Questions / Issues
+## Questions / Issues
+
 If you got any questions or problems using the image, please visit our [Github Repository](https://github.com/Monogramm/docker-sonarqube) and write an issue.
+
+[uri_license]: http://www.gnu.org/licenses/agpl.html
+
+[uri_license_image]: https://img.shields.io/badge/License-AGPL%20v3-blue.svg

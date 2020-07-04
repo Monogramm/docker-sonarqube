@@ -1,4 +1,4 @@
-FROM sonarqube:enterprise-beta
+FROM sonarqube:community
 
 ENV SONARQUBE_HOME /opt/sonarqube
 
@@ -17,7 +17,7 @@ RUN set -ex; \
 # Arguments to label built container
 ARG VCS_REF
 ARG BUILD_DATE
-ARG VERSION=enterprise-beta
+ARG VERSION=community
 
 # Container labels (http://label-schema.org/)
 # Container annotations (https://github.com/opencontainers/image-spec)

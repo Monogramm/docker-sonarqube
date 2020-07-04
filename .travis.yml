@@ -16,7 +16,7 @@ before_install:
   - export TAG=travis
   - export VCS_REF=`git rev-parse --short HEAD`
   - export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
-  - export IMAGE_NAME=sonarqube
+  - export IMAGE_NAME=monogramm/docker-sonarqube:${VERSION}-travis
 
 install:
   - cd "$dir"
@@ -65,7 +65,7 @@ matrix:
     - env: VERSION=community-beta VARIANT=debian
 
 env: # Environments
-    - VERSION=enterprise-beta VARIANT=debian
-    - VERSION=developer-beta VARIANT=debian
-    - VERSION=community-beta VARIANT=debian
+    - VERSION=enterprise VARIANT=debian
+    - VERSION=developer VARIANT=debian
+    - VERSION=community VARIANT=debian
     - VERSION=lts VARIANT=debian
