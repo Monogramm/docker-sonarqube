@@ -23,6 +23,7 @@ services:
     networks:
       - sonarnet
     volumes:
+      - sonarqube_logs:/opt/sonarqube/logs:ro
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
 
