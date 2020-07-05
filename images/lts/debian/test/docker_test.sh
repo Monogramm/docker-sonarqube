@@ -21,7 +21,8 @@ if ! ping -c 10 -q sonarqube ; then
     echo 'Check the following logs for details:'
     ls -al /opt/sonarqube/logs
     tail -n 100 /opt/sonarqube/logs/*.log
-    if grep 'max virtual memory areas vm.max_map_count .* is too low, increase to at least [262144]' /opt/sonarqube/logs/es.log; then
+    # FIXME vm.max_map_count not applied in Dockerhub
+    if grep 'max virtual memory areas vm.max_map_count .* is too low, increase to at least .*' /opt/sonarqube/logs/es.log; then
         echo 'Bypass virtual memory error not applied in DockerHub...'
         exit 0
     else
