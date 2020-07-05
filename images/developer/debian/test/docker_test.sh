@@ -8,7 +8,6 @@ sleep 60
 echo "Checking main containers are reachable..."
 if ! ping -c 10 -q sonarqube_db ; then
     echo 'SonarQube Database container is not responding!'
-    # TODO Display logs to help bug fixing
     echo 'Check the following logs for details:'
     ls -al /opt/sonarqube/logs
     tail -n 100 /opt/sonarqube/logs/*.log
@@ -17,7 +16,6 @@ fi
 
 if ! ping -c 10 -q sonarqube ; then
     echo 'SonarQube Main container is not responding!'
-    # TODO Display logs to help bug fixing
     echo 'Check the following logs for details:'
     ls -al /opt/sonarqube/logs
     tail -n 100 /opt/sonarqube/logs/*.log
