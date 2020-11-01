@@ -75,7 +75,7 @@ services:
     container_name: sonarqube_db
     restart: always
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "${SONARQUBE_DB_USER}"]
+      test: ["CMD", "pg_isready", "-U", "${SONARQUBE_DB_USER}", "-d", "${SONARQUBE_DB_NAME}"]
     expose:
       - '5432'
     #ports:

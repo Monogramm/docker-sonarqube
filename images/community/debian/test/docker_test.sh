@@ -3,7 +3,7 @@
 set -e
 
 echo "Waiting to ensure everything is fully ready for the tests..."
-sleep 60
+sleep 300
 
 echo "Checking main containers are reachable..."
 if ! ping -c 10 -q sonarqube_db ; then
@@ -28,12 +28,11 @@ if ! ping -c 10 -q sonarqube ; then
     fi
 fi
 
-# XXX Add your own tests
 # https://docs.docker.com/docker-hub/builds/automated-testing/
-#echo "Executing SonarQube app tests..."
-## TODO Test result of tests
+#echo "Test SonarQube Healthcheck..."
+curl http://sonarqube:9000/api/system/status
 
 # Success
-echo 'Docker tests successful'
-ls -al /opt/sonarqube/logs
+echo 'Docker tests successful. Check logs for details:'
+tail /opt/sonarqube/logs/*
 exit 0
