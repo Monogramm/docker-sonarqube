@@ -1,10 +1,10 @@
 FROM sonarqube:lts
 
-ENV SONARQUBE_HOME /opt/sonarqube
+ENV SONARQUBE_HOME=/opt/sonarqube
 
 # Add SonarQube plugins
 RUN set -ex; \
-    cd $SONARQUBE_HOME/extensions/plugins; \
+    cd "$SONARQUBE_HOME/extensions/plugins"; \
     ! echo "${SONAR_VERSION}" | grep -q "^7.9." || curl \
         -L "https://binaries.sonarsource.com/Distribution/sonar-ldap-plugin/sonar-ldap-plugin-2.2.0.608.jar" \
         -o sonar-ldap-plugin-2.2.0.608.jar \
